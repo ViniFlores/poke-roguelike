@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca8qpntev1630"]
+
+[ext_resource type="Script" path="res://Pokemon.gd" id="1_h42mh"]
+[ext_resource type="Texture2D" uid="uid://c5wjbmb2j136c" path="res://assets/battle_menu.png" id="2_7jdoh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hricf"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8m5e0"]
+bg_color = Color(0, 0.972549, 0.647059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7hi1"]
+bg_color = Color(0, 0.788235, 0.980392, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qr6i"]
+atlas = ExtResource("2_7jdoh")
+region = Rect2(3, 44, 104, 37)
+
+[node name="PlayerPokemon" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_h42mh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+
+[node name="FetchPokemonDataHTTP" type="HTTPRequest" parent="."]
+
+[node name="HPBar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 491.0
+offset_top = -45.5
+offset_right = 635.0
+offset_bottom = -32.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_hricf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8m5e0")
+max_value = 50.0
+value = 25.0
+show_percentage = false
+
+[node name="XPBar" type="ProgressBar" parent="."]
+offset_left = 443.0
+offset_top = 4.0
+offset_right = 635.0
+offset_bottom = 12.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_q7hi1")
+value = 50.0
+show_percentage = false
+
+[node name="Info" type="Sprite2D" parent="."]
+position = Vector2(503, -38.5)
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_7qr6i")
+
+[node name="Hp" type="Label" parent="."]
+offset_left = 484.0
+offset_top = -29.5
+offset_right = 634.0
+offset_bottom = -1.5
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "10 / 10"
+horizontal_alignment = 2
+
+[node name="Level" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 494.0
+offset_top = -82.0
+offset_right = 636.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Lv 1"
+horizontal_alignment = 2
+
+[node name="Name" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 393.0
+offset_top = -81.0
+offset_right = 544.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Name"
+
+[connection signal="request_completed" from="FetchPokemonDataHTTP" to="." method="_on_fetch_pokemon_data_http_request_completed"]

@@ -1,0 +1,191 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4i0mcfd8okar"]
+
+[ext_resource type="PackedScene" uid="uid://ca8qpntev1630" path="res://player_pokemon.tscn" id="1_f08j7"]
+[ext_resource type="PackedScene" uid="uid://dis1p5au5t2ur" path="res://enemy_pokemon.tscn" id="2_340qn"]
+[ext_resource type="Texture2D" uid="uid://be3gtlco8jjiq" path="res://assets/bg.png" id="3_vtii2"]
+[ext_resource type="Script" path="res://HUD/HUD.gd" id="4_l11cn"]
+[ext_resource type="Texture2D" uid="uid://c5wjbmb2j136c" path="res://assets/battle_menu.png" id="4_moted"]
+[ext_resource type="Script" path="res://HUD/FightMenu.gd" id="6_8cwmv"]
+[ext_resource type="Script" path="res://HUD/MoveButton.gd" id="7_g18k5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eto7p"]
+atlas = ExtResource("4_moted")
+region = Rect2(297, 4, 160, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rsyfg"]
+texture = SubResource("AtlasTexture_eto7p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[node name="Battle" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576.071, 268.5)
+scale = Vector2(4.79464, 4.79464)
+texture = ExtResource("3_vtii2")
+
+[node name="PlayerPokemon" parent="." instance=ExtResource("1_f08j7")]
+position = Vector2(302, 471)
+
+[node name="EnemyPokemon" parent="." instance=ExtResource("2_340qn")]
+position = Vector2(840, 267)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_l11cn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MainMenu" type="PanelContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/MainMenu"]
+custom_minimum_size = Vector2(0, 183)
+layout_mode = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/VBoxContainer/MainMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rsyfg")
+
+[node name="GridContainer" type="GridContainer" parent="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="FightButton" type="Button" parent="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "FIGHT"
+
+[node name="PokemonButton" type="Button" parent="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "POKEMON"
+
+[node name="ItemsButton" type="Button" parent="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "ITEMS"
+
+[node name="RunButton" type="Button" parent="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "RUN"
+
+[node name="FightMenu" type="HBoxContainer" parent="HUD/VBoxContainer"]
+custom_minimum_size = Vector2(0, 183)
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("6_8cwmv")
+
+[node name="MovesPanel" type="PanelContainer" parent="HUD/VBoxContainer/FightMenu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rsyfg")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/FightMenu/MovesPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 4
+
+[node name="MovesContainer" type="GridContainer" parent="HUD/VBoxContainer/FightMenu/MovesPanel/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="MoveButton" type="Button" parent="HUD/VBoxContainer/FightMenu/MovesPanel/MarginContainer/MovesContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+alignment = 0
+script = ExtResource("7_g18k5")
+
+[node name="MoveButton2" type="Button" parent="HUD/VBoxContainer/FightMenu/MovesPanel/MarginContainer/MovesContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+alignment = 0
+script = ExtResource("7_g18k5")
+
+[node name="MoveButton3" type="Button" parent="HUD/VBoxContainer/FightMenu/MovesPanel/MarginContainer/MovesContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+alignment = 0
+script = ExtResource("7_g18k5")
+
+[node name="MoveButton4" type="Button" parent="HUD/VBoxContainer/FightMenu/MovesPanel/MarginContainer/MovesContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "-"
+alignment = 0
+script = ExtResource("7_g18k5")
+
+[node name="InfoContainer" type="PanelContainer" parent="HUD/VBoxContainer/FightMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_rsyfg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/VBoxContainer/FightMenu/InfoContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PPLabel" type="Label" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+text = "PP"
+vertical_alignment = 2
+
+[node name="PPValue" type="Label" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 80
+text = "45/45"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="TypeLabel" type="Label" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_font_sizes/font_size = 48
+text = "TYPE/"
+vertical_alignment = 2
+
+[node name="TypeValue" type="Label" parent="HUD/VBoxContainer/FightMenu/InfoContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+theme_override_font_sizes/font_size = 80
+text = "NORMAL"
+vertical_alignment = 2
+
+[connection signal="pressed" from="HUD/VBoxContainer/MainMenu/HBoxContainer/PanelContainer/GridContainer/FightButton" to="HUD" method="_on_fight_button_pressed"]
